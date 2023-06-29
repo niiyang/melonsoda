@@ -22,7 +22,6 @@ class App:
         self.player_y = 60
         self.player_vy = 0
         self.soda = [(i * 60, randint(0, 104), True) for i in range(4)]
-        self.sushi = [(i * 30, randint(0, 104), True) for i in range(4)] 
 
         # 音楽再生
         pyxel.playm(0, loop=True)
@@ -31,6 +30,8 @@ class App:
         pyxel.run(self.update, self.draw)
 
     def update(self):
+       
+        #終了する
         if pyxel.btnp(pyxel.KEY_Q):
             pyxel.quit()
 
@@ -64,11 +65,6 @@ class App:
             if is_active:
                 pyxel.blt(x, y, 0, 16, 0, 16, 16, 0)
 
-        # draw sushi
-        for a, b, is_active in self.sushi:
-            if is_active:
-                pyxel.blt(a, b, 0, 32, 0, 16, 16, 0)
-
         # draw kadori
         pyxel.blt(
             self.player_x,
@@ -86,6 +82,12 @@ class App:
         pyxel.text(5, 4, s, 1)
         pyxel.text(4, 4, s, 7)
 
+        if not self.START:
+            MESSAGE ="メロンソーダを飲みたいんだよ！"
+            pyxel.text(61, 50, MESSAGE, 1)
+            pyxel.text(60, 50, MESSAGE, 7)
+            return
+
     def update_soda(self, x, y, is_active):
         if is_active and abs(x - self.player_x) < 12 and abs(y - self.player_y) < 12:
             is_active = False
@@ -101,21 +103,5 @@ class App:
             is_active = True
 
         return (x, y, is_active)
-
-    def update_sushi(self, a, b, is_active):
-        if is_active and abs(a - self.player_a) < 8 and abs(b - self.player_) < 8:
-            is_active = False
-            self.score += 300
-            self.player_vy = min(self.player_vy, -8)
-            pyxel.play(1,18,loop=False)
-
-        a -= 2
-
-        if a < -40:
-            a += 240
-            b = randint(0, 104)
-            is_active = True
-
-        return (a, b, is_active)
     
 App()
