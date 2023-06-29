@@ -11,7 +11,7 @@ LEFT = Point(16, 16)
 
 class App:
     def __init__(self):
-        pyxel.init(160, 120)
+        pyxel.init(160, 120, caption="Hello Pyxel")
         pyxel.load("my_resource.pyxres")
         self.direction = RIGHT
 
