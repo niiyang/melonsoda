@@ -12,8 +12,10 @@ LEFT = Point(16, 16)
 
 class App:
     def __init__(self):
+        # pyxel.init(160, 120, caption="Kadori_soda")
         pyxel.init(160, 120, caption="Kadori_soda")
-        pyxel.load("my_resource.pyxres")
+
+        pyxel.load("my_resource")
         self.direction = RIGHT
 
         #START FLAG
@@ -145,7 +147,8 @@ class App:
         return (x, y, is_active)
 
     def update_sushi(self, a, b, is_active):
-        if is_active and abs(a - self.player_a) < 8 and abs(b - self.player_) < 8:
+        #if is_active and abs(a - self.player_a) < 8 and abs(b - self.player_) < 8:
+        if is_active and abs(a - self.player_x) < 8 and abs(b - self.player_y) < 8:
             is_active = False
             self.score += 300
             self.player_vy = min(self.player_vy, -8)
